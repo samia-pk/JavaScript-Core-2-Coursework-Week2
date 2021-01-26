@@ -1,5 +1,34 @@
+
 function highlightWords(paragraph, colours) {
-  // Write your code here...
+
+  let div = document.getElementById("content");
+  let select = document.createElement("select");
+  div.appendChild(select);
+
+  let p = document.createElement("p");
+  div.appendChild(p);
+
+  colours.forEach((elem) => {
+    let option = document.createElement("option");
+    option.innerHTML = elem;
+    select.appendChild(option);
+  });
+
+  let splitPara = paragraph.split(" ");
+
+  splitPara.forEach((elem) => {
+    let span = document.createElement("span");
+    span.innerHTML = elem + " ";
+    p.appendChild(span);
+
+    span.addEventListener("click", function () {
+      if (select.value === "none") {
+        this.style.backgroundColor = "transparent";
+      } else {
+        this.style.backgroundColor = select.value;
+      }
+    });
+  });
 }
 
 const paragraph =
