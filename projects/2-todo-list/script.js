@@ -1,7 +1,47 @@
 function populateTodoList(todos) {
   let list = document.getElementById("todo-list");
-  // Write your code to create todo list elements with completed and delete buttons here, all todos should display inside the "todo-list" element.
+
+list.innerHTML = "";
+
+  todos.forEach((elem, index) => {
+    let li = document.createElement("li");
+    li.className =
+      "list-group-item d-flex justify-content-between align-items-center";
+    li.innerHTML = elem.task;
+
+    let span = document.createElement("span");
+    span.className = "badge bg-primary rounded-pill";
+
+    let iconCheck = document.createElement("i");
+    iconCheck.className = "fa fa-check";
+    iconCheck.setAttribute("aria-hidden", true);
+iconCheck.addEventListener("click", () => {
+      if (li.style.textDecoration !== "line-through") {
+        li.style.textDecoration = "line-through";
+      } else {
+        li.style.textDecoration = "";
+      }
+    });
+
+    let iconTrash = document.createElement("i");
+    iconTrash.className = "fa fa-trash";
+    iconTrash.setAttribute("aria-hidden", true);
+
+    iconTrash.addEventListener("click", () => {
+      delete todos[index];
+      populateTodoList();
+    });
+
+    span.appendChild(iconCheck);
+    span.appendChild(iconTrash);
+    li.appendChild(span);
+    list.appendChild(li);
+  });
 }
+
+
+  // Write your code to create todo list elements with completed and delete buttons here, all todos should display inside the "todo-list" element.
+
 
 // These are the same todos that currently display in the HTML
 // You will want to remove the ones in the current HTML after you have created them using JavaScript
